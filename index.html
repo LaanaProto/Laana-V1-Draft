@@ -1,0 +1,6376 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Laana V1 Draft</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic"/>
+    <style>
+      body {
+        width: 60em;
+        margin: 1em auto;
+        color: #222;
+        font-family: "Ubuntu", sans-serif;
+        padding-bottom: 4em;
+      }
+
+      h1 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      h2 {
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+        margin: 1.5em 0;
+      }
+
+      h3 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      a {
+        text-decoration: none;
+        color: #567e25;
+      }
+
+      table {
+        width: 100%;
+        font-size: 80%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        font-weight: 700;
+        background-color: #dcdcdc;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #fbfbfb;
+      }
+
+      td {
+        border: 1px solid #ccc;
+        padding: 0.5ex 2ex;
+      }
+
+      td p {
+        text-indent: 1em;
+        margin: 0;
+      }
+
+      td p:nth-child(1) {
+        text-indent: 0;  
+      }
+
+       
+      .field-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(3) {  
+        width: 6em;
+      }
+      .field-table td:nth-child(4) {  
+        width: auto;
+      }
+
+       
+      .extension-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(3) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(4) {  
+        width: 5em;
+      }
+      .extension-table td:nth-child(5) {  
+        width: auto;
+      }
+
+       
+      .enum-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(3) {  
+        width: auto;
+      }
+
+       
+      .scalar-value-types-table tr {
+        height: 3em;
+      }
+
+       
+      #toc-container ul {
+        list-style-type: none;
+        padding-left: 1em;
+        line-height: 180%;
+        margin: 0;
+      }
+      #toc > li > a {
+        font-weight: bold;
+      }
+
+       
+      .file-heading {
+        width: 100%;
+        display: table;
+        border-bottom: 1px solid #aaa;
+        margin: 4em 0 1.5em 0;
+      }
+      .file-heading h2 {
+        border: none;
+        display: table-cell;
+      }
+      .file-heading a {
+        text-align: right;
+        display: table-cell;
+      }
+
+       
+      .badge {
+        width: 1.6em;
+        height: 1.6em;
+        display: inline-block;
+
+        line-height: 1.6em;
+        text-align: center;
+        font-weight: bold;
+        font-size: 60%;
+
+        color: #89ba48;
+        background-color: #dff0c8;
+
+        margin: 0.5ex 1em 0.5ex -1em;
+        border: 1px solid #fbfbfb;
+        border-radius: 1ex;
+      }
+    </style>
+
+    
+    <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+  </head>
+
+  <body>
+
+    <h1 id="title">Laana V1 Draft</h1>
+
+    <h2>Table of Contents</h2>
+
+    <div id="toc-container">
+      <ul id="toc">
+        
+          
+          <li>
+            <a href="#entity%2ffile.proto">entity/file.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.GroupFile"><span class="badge">M</span>GroupFile</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GroupFolder"><span class="badge">M</span>GroupFolder</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaFile"><span class="badge">M</span>LaanaFile</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#entity%2fmessage.proto">entity/message.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage"><span class="badge">M</span>LaanaMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.ArkMessage"><span class="badge">M</span>LaanaMessage.ArkMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.Bubble"><span class="badge">M</span>LaanaMessage.Bubble</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.Bubble.Segment"><span class="badge">M</span>LaanaMessage.Bubble.Segment</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.Bubble.Segment.At"><span class="badge">M</span>LaanaMessage.Bubble.Segment.At</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.ContactCard"><span class="badge">M</span>LaanaMessage.ContactCard</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.ExtendedMessage"><span class="badge">M</span>LaanaMessage.ExtendedMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.ForwardedMessage"><span class="badge">M</span>LaanaMessage.ForwardedMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.ForwardedMessageRef"><span class="badge">M</span>LaanaMessage.ForwardedMessageRef</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.LinkCard"><span class="badge">M</span>LaanaMessage.LinkCard</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.LocationCard"><span class="badge">M</span>LaanaMessage.LocationCard</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.MarketFace"><span class="badge">M</span>LaanaMessage.MarketFace</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.MusicCard"><span class="badge">M</span>LaanaMessage.MusicCard</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.NormalFile"><span class="badge">M</span>LaanaMessage.NormalFile</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.SingleImage"><span class="badge">M</span>LaanaMessage.SingleImage</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.UnknownMessage"><span class="badge">M</span>LaanaMessage.UnknownMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.Video"><span class="badge">M</span>LaanaMessage.Video</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.Voice"><span class="badge">M</span>LaanaMessage.Voice</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.XmlMessage"><span class="badge">M</span>LaanaMessage.XmlMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaPeer"><span class="badge">M</span>LaanaPeer</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.ContactCard.Type"><span class="badge">E</span>LaanaMessage.ContactCard.Type</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaMessage.MusicCard.Source"><span class="badge">E</span>LaanaMessage.MusicCard.Source</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaPeer.Type"><span class="badge">E</span>LaanaPeer.Type</a>
+                </li>
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#action%2fmessage_action.proto">action/message_action.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.GetForwardedMessagesPing"><span class="badge">M</span>GetForwardedMessagesPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetForwardedMessagesPong"><span class="badge">M</span>GetForwardedMessagesPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetHistoryMessagesPing"><span class="badge">M</span>GetHistoryMessagesPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetHistoryMessagesPong"><span class="badge">M</span>GetHistoryMessagesPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetMessagePing"><span class="badge">M</span>GetMessagePing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetMessagePong"><span class="badge">M</span>GetMessagePong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetMessagesPing"><span class="badge">M</span>GetMessagesPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetMessagesPong"><span class="badge">M</span>GetMessagesPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaOutgoingMessage"><span class="badge">M</span>LaanaOutgoingMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaOutgoingMessage.ConstructedForwardedMessage"><span class="badge">M</span>LaanaOutgoingMessage.ConstructedForwardedMessage</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaOutgoingMessage.ConstructedForwardedMessage.Node"><span class="badge">M</span>LaanaOutgoingMessage.ConstructedForwardedMessage.Node</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.MarkPeerMessageAsReadPing"><span class="badge">M</span>MarkPeerMessageAsReadPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.SendMessagePing"><span class="badge">M</span>SendMessagePing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.SendMessagePong"><span class="badge">M</span>SendMessagePong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.WithdrawMessagePing"><span class="badge">M</span>WithdrawMessagePing</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#entity%2fuser.proto">entity/user.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.LaanaUserEntity"><span class="badge">M</span>LaanaUserEntity</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaUserEntity.BuddyRoleData"><span class="badge">M</span>LaanaUserEntity.BuddyRoleData</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaUserEntity.GroupRoleData"><span class="badge">M</span>LaanaUserEntity.GroupRoleData</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#Laana.LaanaUserEntity.GroupRoleData.PermissionLevel"><span class="badge">E</span>LaanaUserEntity.GroupRoleData.PermissionLevel</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaUserEntity.Sex"><span class="badge">E</span>LaanaUserEntity.Sex</a>
+                </li>
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#entity%2fgroup.proto">entity/group.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.LaanaGroup"><span class="badge">M</span>LaanaGroup</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#action%2fcontact_action.proto">action/contact_action.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.GetAllBuddiesPing"><span class="badge">M</span>GetAllBuddiesPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetAllBuddiesPong"><span class="badge">M</span>GetAllBuddiesPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetAllGroupsPing"><span class="badge">M</span>GetAllGroupsPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetAllGroupsPong"><span class="badge">M</span>GetAllGroupsPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetBuddyInfoPing"><span class="badge">M</span>GetBuddyInfoPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetBuddyInfoPong"><span class="badge">M</span>GetBuddyInfoPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetGroupInfoPing"><span class="badge">M</span>GetGroupInfoPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetGroupInfoPong"><span class="badge">M</span>GetGroupInfoPong</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#action%2fgroup_action.proto">action/group_action.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.GetAllGroupMembersInfoPing"><span class="badge">M</span>GetAllGroupMembersInfoPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetAllGroupMembersInfoPong"><span class="badge">M</span>GetAllGroupMembersInfoPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetGroupMemberInfoPing"><span class="badge">M</span>GetGroupMemberInfoPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetGroupMemberInfoPong"><span class="badge">M</span>GetGroupMemberInfoPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetGroupMemberUinsPing"><span class="badge">M</span>GetGroupMemberUinsPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetGroupMemberUinsPong"><span class="badge">M</span>GetGroupMemberUinsPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.KickGroupMemberPing"><span class="badge">M</span>KickGroupMemberPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.QuitGroupPing"><span class="badge">M</span>QuitGroupPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.SetGroupAdminPing"><span class="badge">M</span>SetGroupAdminPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.SetGroupAvatarPing"><span class="badge">M</span>SetGroupAvatarPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.SetGroupAvatarPong"><span class="badge">M</span>SetGroupAvatarPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.SetGroupMemberCardPing"><span class="badge">M</span>SetGroupMemberCardPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.SetGroupMemberShutUpPing"><span class="badge">M</span>SetGroupMemberShutUpPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.SetGroupMemberSpecialTitlePing"><span class="badge">M</span>SetGroupMemberSpecialTitlePing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.SetGroupNamePing"><span class="badge">M</span>SetGroupNamePing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.SetGroupShutUpAllPing"><span class="badge">M</span>SetGroupShutUpAllPing</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#Laana.SetGroupAdminPing.Operation"><span class="badge">E</span>SetGroupAdminPing.Operation</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.SetGroupShutUpAllPing.Operation"><span class="badge">E</span>SetGroupShutUpAllPing.Operation</a>
+                </li>
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#event%2frequest_event.proto">event/request_event.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.LaanaSelfInvitedToGroupEvent"><span class="badge">M</span>LaanaSelfInvitedToGroupEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaSomeoneRequestToAddBuddyEvent"><span class="badge">M</span>LaanaSomeoneRequestToAddBuddyEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaSomeoneRequestToJoinGroupEvent"><span class="badge">M</span>LaanaSomeoneRequestToJoinGroupEvent</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#Laana.LaanaSelfInvitedToGroupEvent.State"><span class="badge">E</span>LaanaSelfInvitedToGroupEvent.State</a>
+                </li>
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#action%2frequest_action.proto">action/request_action.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.HandleBuddyAddRequestPing"><span class="badge">M</span>HandleBuddyAddRequestPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.HandleGroupInvitationPing"><span class="badge">M</span>HandleGroupInvitationPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.HandleGroupInvitationPong"><span class="badge">M</span>HandleGroupInvitationPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.HandleGroupJoinRequestPing"><span class="badge">M</span>HandleGroupJoinRequestPing</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#Laana.HandleBuddyAddRequestPing.Operation"><span class="badge">E</span>HandleBuddyAddRequestPing.Operation</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.HandleGroupInvitationPing.Operation"><span class="badge">E</span>HandleGroupInvitationPing.Operation</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.HandleGroupJoinRequestPing.Operation"><span class="badge">E</span>HandleGroupJoinRequestPing.Operation</a>
+                </li>
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#action%2ffile_action.proto">action/file_action.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.CreateGroupFolderPing"><span class="badge">M</span>CreateGroupFolderPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.CreateGroupFolderPong"><span class="badge">M</span>CreateGroupFolderPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.DeleteGroupFilePing"><span class="badge">M</span>DeleteGroupFilePing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.DeleteGroupFolderPing"><span class="badge">M</span>DeleteGroupFolderPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.DestroyCachePing"><span class="badge">M</span>DestroyCachePing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetFileDataPing"><span class="badge">M</span>GetFileDataPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetFileDataPong"><span class="badge">M</span>GetFileDataPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetGroupFileListPing"><span class="badge">M</span>GetGroupFileListPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GetGroupFileListPong"><span class="badge">M</span>GetGroupFileListPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.PrepareCacheByUrlPing"><span class="badge">M</span>PrepareCacheByUrlPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.PrepareCacheByUrlPing.HeadersEntry"><span class="badge">M</span>PrepareCacheByUrlPing.HeadersEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.PrepareCacheByUrlPong"><span class="badge">M</span>PrepareCacheByUrlPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.UploadCachePing"><span class="badge">M</span>UploadCachePing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.UploadCachePong"><span class="badge">M</span>UploadCachePong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.UploadGroupFilePing"><span class="badge">M</span>UploadGroupFilePing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.UploadGroupFilePong"><span class="badge">M</span>UploadGroupFilePong</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#Laana.PrepareCacheByUrlPing.Method"><span class="badge">E</span>PrepareCacheByUrlPing.Method</a>
+                </li>
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#action%2faction_wrapper.proto">action/action_wrapper.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.ExtendedActionPing"><span class="badge">M</span>ExtendedActionPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.ExtendedActionPong"><span class="badge">M</span>ExtendedActionPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.FailedPong"><span class="badge">M</span>FailedPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.GeneralSuccessPong"><span class="badge">M</span>GeneralSuccessPong</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaActionPing"><span class="badge">M</span>LaanaActionPing</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaActionPong"><span class="badge">M</span>LaanaActionPong</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#event%2fbuddy_event.proto">event/buddy_event.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.LaanaBuddyAddedEvent"><span class="badge">M</span>LaanaBuddyAddedEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaBuddyMessageWithdrawalEvent"><span class="badge">M</span>LaanaBuddyMessageWithdrawalEvent</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#event%2fmeta_event.proto">event/meta_event.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.LaanaBotOfflineEvent"><span class="badge">M</span>LaanaBotOfflineEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaBotOnlineEvent"><span class="badge">M</span>LaanaBotOnlineEvent</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#event%2fgroup_event.proto">event/group_event.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.LaanaGroupAdminChangeEvent"><span class="badge">M</span>LaanaGroupAdminChangeEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaGroupEmojiLikeEvent"><span class="badge">M</span>LaanaGroupEmojiLikeEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaGroupEssenceMessageEvent"><span class="badge">M</span>LaanaGroupEssenceMessageEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaGroupLiftShutUpAllEvent"><span class="badge">M</span>LaanaGroupLiftShutUpAllEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaGroupLiftShutUpMemberEvent"><span class="badge">M</span>LaanaGroupLiftShutUpMemberEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaGroupMemberCardChangeEvent"><span class="badge">M</span>LaanaGroupMemberCardChangeEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaGroupMemberDecreaseEvent"><span class="badge">M</span>LaanaGroupMemberDecreaseEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaGroupMemberIncreaseEvent"><span class="badge">M</span>LaanaGroupMemberIncreaseEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaGroupMemberTitleChangeEvent"><span class="badge">M</span>LaanaGroupMemberTitleChangeEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaGroupMessageWithdrawalEvent"><span class="badge">M</span>LaanaGroupMessageWithdrawalEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaGroupShutUpAllEvent"><span class="badge">M</span>LaanaGroupShutUpAllEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaGroupShutUpMemberEvent"><span class="badge">M</span>LaanaGroupShutUpMemberEvent</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#Laana.LaanaGroupAdminChangeEvent.Operation"><span class="badge">E</span>LaanaGroupAdminChangeEvent.Operation</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaGroupEmojiLikeEvent.Operation"><span class="badge">E</span>LaanaGroupEmojiLikeEvent.Operation</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaGroupEssenceMessageEvent.Operation"><span class="badge">E</span>LaanaGroupEssenceMessageEvent.Operation</a>
+                </li>
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#event%2fevent_wrapper.proto">event/event_wrapper.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.LaanaEventWrapper"><span class="badge">M</span>LaanaEventWrapper</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaExtendedEvent"><span class="badge">M</span>LaanaExtendedEvent</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#laana.proto">laana.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#Laana.LaanaClientSideHandshake"><span class="badge">M</span>LaanaClientSideHandshake</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaDataWrapper"><span class="badge">M</span>LaanaDataWrapper</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaExtendedData"><span class="badge">M</span>LaanaExtendedData</a>
+                </li>
+              
+                <li>
+                  <a href="#Laana.LaanaServerSideHandshake"><span class="badge">M</span>LaanaServerSideHandshake</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#Laana.LaanaServerSideHandshake.Result"><span class="badge">E</span>LaanaServerSideHandshake.Result</a>
+                </li>
+              
+              
+              
+            </ul>
+          </li>
+        
+        <li><a href="#scalar-value-types">Scalar Value Types</a></li>
+      </ul>
+    </div>
+
+    
+      
+      <div class="file-heading">
+        <h2 id="entity/file.proto">entity/file.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.GroupFile">GroupFile</h3>
+        <p>群文件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>cacheId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>缓存 ID，用于获取文件数据 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>文件名 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>size</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>文件大小 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>businessId</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>文件类型 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>uploaderUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>上传者 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>uploadTime</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>上传时间 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>modifyTime</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>修改时间 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>downloadCount</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>下载次数 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastModifyTime</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td>optional</td>
+                  <td><p>最后修改时间 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>expireTime</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td>optional</td>
+                  <td><p>过期时间 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GroupFolder">GroupFolder</h3>
+        <p>群文件夹</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>folderId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>文件夹 ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>文件夹名 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>creatorUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>创建者 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createTime</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>创建时间 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fileCount</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>包含的文件数量 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaFile">LaanaFile</h3>
+        <p>Laana 文件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>url</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cacheId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>raw</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="entity/message.proto">entity/message.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.LaanaMessage">LaanaMessage</h3>
+        <p>Laana 消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>msgSeq</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>消息序列号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>time</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>时间戳 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>senderUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>发送者 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>peer</td>
+                  <td><a href="#Laana.LaanaPeer">LaanaPeer</a></td>
+                  <td></td>
+                  <td><p>消息来源 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>bubble</td>
+                  <td><a href="#Laana.LaanaMessage.Bubble">LaanaMessage.Bubble</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>file</td>
+                  <td><a href="#Laana.LaanaMessage.NormalFile">LaanaMessage.NormalFile</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>singleImage</td>
+                  <td><a href="#Laana.LaanaMessage.SingleImage">LaanaMessage.SingleImage</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>marketFace</td>
+                  <td><a href="#Laana.LaanaMessage.MarketFace">LaanaMessage.MarketFace</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>video</td>
+                  <td><a href="#Laana.LaanaMessage.Video">LaanaMessage.Video</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>voice</td>
+                  <td><a href="#Laana.LaanaMessage.Voice">LaanaMessage.Voice</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>linkCard</td>
+                  <td><a href="#Laana.LaanaMessage.LinkCard">LaanaMessage.LinkCard</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>contactCard</td>
+                  <td><a href="#Laana.LaanaMessage.ContactCard">LaanaMessage.ContactCard</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>musicCard</td>
+                  <td><a href="#Laana.LaanaMessage.MusicCard">LaanaMessage.MusicCard</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>locationCard</td>
+                  <td><a href="#Laana.LaanaMessage.LocationCard">LaanaMessage.LocationCard</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>forwardedMsgRef</td>
+                  <td><a href="#Laana.LaanaMessage.ForwardedMessageRef">LaanaMessage.ForwardedMessageRef</a></td>
+                  <td></td>
+                  <td><p>转发消息不进行递归解析，而是提供一个引用 ID，延迟解析，防止占用过多资源 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>xmlMessage</td>
+                  <td><a href="#Laana.LaanaMessage.XmlMessage">LaanaMessage.XmlMessage</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>arkMessage</td>
+                  <td><a href="#Laana.LaanaMessage.ArkMessage">LaanaMessage.ArkMessage</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>unknownMessage</td>
+                  <td><a href="#Laana.LaanaMessage.UnknownMessage">LaanaMessage.UnknownMessage</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>extendedMessage</td>
+                  <td><a href="#Laana.LaanaMessage.ExtendedMessage">LaanaMessage.ExtendedMessage</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.ArkMessage">LaanaMessage.ArkMessage</h3>
+        <p>卡片消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>json</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Json 内容 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.Bubble">LaanaMessage.Bubble</h3>
+        <p>气泡消息，也即传统的图文混排消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>segments</td>
+                  <td><a href="#Laana.LaanaMessage.Bubble.Segment">LaanaMessage.Bubble.Segment</a></td>
+                  <td>repeated</td>
+                  <td><p>消息包含的段落 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>repliedMsgSeq</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td>optional</td>
+                  <td><p>引用（回复）的消息的 msgSeq </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.Bubble.Segment">LaanaMessage.Bubble.Segment</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>text</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>一个 Segment 可以是纯文本 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>face</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>一个 Segment 可以是 QQ 表情 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>at</td>
+                  <td><a href="#Laana.LaanaMessage.Bubble.Segment.At">LaanaMessage.Bubble.Segment.At</a></td>
+                  <td></td>
+                  <td><p>一个 Segment 可以是 At（提及）某人 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>image</td>
+                  <td><a href="#Laana.LaanaFile">LaanaFile</a></td>
+                  <td></td>
+                  <td><p>一个 Segment 可以是图片 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.Bubble.Segment.At">LaanaMessage.Bubble.Segment.At</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>uin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>被提及人的 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>被提及人的昵称 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.ContactCard">LaanaMessage.ContactCard</h3>
+        <p>推荐联系人卡片消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#Laana.LaanaMessage.ContactCard.Type">LaanaMessage.ContactCard.Type</a></td>
+                  <td></td>
+                  <td><p>联系人类型 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>uin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>联系人 Uin </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.ExtendedMessage">LaanaMessage.ExtendedMessage</h3>
+        <p>扩展消息，与 UnknownMessage 的区别在于，ExtendedMessage 的 content 是 protobuf 序列化的消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>消息类型 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>content</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>消息内容 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.ForwardedMessage">LaanaMessage.ForwardedMessage</h3>
+        <p>合并转发消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>refId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>转发消息的引用 ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>messages</td>
+                  <td><a href="#Laana.LaanaMessage">LaanaMessage</a></td>
+                  <td>repeated</td>
+                  <td><p>包含的消息 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.ForwardedMessageRef">LaanaMessage.ForwardedMessageRef</h3>
+        <p>合并转发消息引用</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>refId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>转发消息的引用 ID，用于获取转发消息本身 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>displayText</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>转发的消息 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.LinkCard">LaanaMessage.LinkCard</h3>
+        <p>链接卡片消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>url</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>卡片链接 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>title</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>卡片标题 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>卡片描述 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>image</td>
+                  <td><a href="#Laana.LaanaFile">LaanaFile</a></td>
+                  <td>optional</td>
+                  <td><p>卡片预览图片 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.LocationCard">LaanaMessage.LocationCard</h3>
+        <p>位置卡片消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>latitude</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>纬度 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>longitude</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>经度 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>title</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>标题 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>address</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>描述 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.MarketFace">LaanaMessage.MarketFace</h3>
+        <p>来自 QQ 表情市场的表情消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>facePackageId</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>表情包 ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>faceId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>表情 ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>faceKey</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>表情的 key </p></td>
+                </tr>
+              
+                <tr>
+                  <td>displayText</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>发送表情时的文字描述，默认为 [动画表情] </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.MusicCard">LaanaMessage.MusicCard</h3>
+        <p>音乐卡片消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>source</td>
+                  <td><a href="#Laana.LaanaMessage.MusicCard.Source">LaanaMessage.MusicCard.Source</a></td>
+                  <td></td>
+                  <td><p>音乐来源 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>音乐 ID </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.NormalFile">LaanaMessage.NormalFile</h3>
+        <p>普通文件消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>file</td>
+                  <td><a href="#Laana.LaanaFile">LaanaFile</a></td>
+                  <td></td>
+                  <td><p>文件 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>文件名 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>size</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>文件大小 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.SingleImage">LaanaMessage.SingleImage</h3>
+        <p>单张图片消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>image</td>
+                  <td><a href="#Laana.LaanaFile">LaanaFile</a></td>
+                  <td></td>
+                  <td><p>图片 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>displayText</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>发送图片时的文字描述，默认为 [图片] </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.UnknownMessage">LaanaMessage.UnknownMessage</h3>
+        <p>未知消息，用于存储无法解析的消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>rawContent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Json 序列化的消息内容 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>typeIdentifier</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>用于标识消息类型，以便识别这些标识符的客户端可以解析消息 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.Video">LaanaMessage.Video</h3>
+        <p>视频消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>video</td>
+                  <td><a href="#Laana.LaanaFile">LaanaFile</a></td>
+                  <td></td>
+                  <td><p>视频 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p>视频时长，单位为秒，若不提供则由服务端解析 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.Voice">LaanaMessage.Voice</h3>
+        <p>语音消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>voice</td>
+                  <td><a href="#Laana.LaanaFile">LaanaFile</a></td>
+                  <td></td>
+                  <td><p>语音 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>语音时长，单位为秒 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaMessage.XmlMessage">LaanaMessage.XmlMessage</h3>
+        <p>Xml 消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>xml</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Xml 内容 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaPeer">LaanaPeer</h3>
+        <p>Laana Peer，可以是好友或群</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#Laana.LaanaPeer.Type">LaanaPeer.Type</a></td>
+                  <td></td>
+                  <td><p>类型 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>uin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Uin 或群号 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="Laana.LaanaMessage.ContactCard.Type">LaanaMessage.ContactCard.Type</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>BUDDY</td>
+                <td>0</td>
+                <td><p>好友</p></td>
+              </tr>
+            
+              <tr>
+                <td>GROUP</td>
+                <td>1</td>
+                <td><p>群</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="Laana.LaanaMessage.MusicCard.Source">LaanaMessage.MusicCard.Source</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>QQ_MUSIC</td>
+                <td>0</td>
+                <td><p>QQ 音乐</p></td>
+              </tr>
+            
+              <tr>
+                <td>NETEASE_MUSIC</td>
+                <td>1</td>
+                <td><p>网易云音乐</p></td>
+              </tr>
+            
+              <tr>
+                <td>CUSTOM</td>
+                <td>2</td>
+                <td><p>自定义</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="Laana.LaanaPeer.Type">LaanaPeer.Type</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>BUDDY</td>
+                <td>0</td>
+                <td><p>好友</p></td>
+              </tr>
+            
+              <tr>
+                <td>GROUP</td>
+                <td>1</td>
+                <td><p>群</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="action/message_action.proto">action/message_action.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.GetForwardedMessagesPing">GetForwardedMessagesPing</h3>
+        <p>获取转发消息 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>refId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>转发的消息的 msgSeq 列表 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetForwardedMessagesPong">GetForwardedMessagesPong</h3>
+        <p>获取转发消息 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>forwardMessage</td>
+                  <td><a href="#Laana.LaanaMessage.ForwardedMessage">LaanaMessage.ForwardedMessage</a></td>
+                  <td></td>
+                  <td><p>转发的消息 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetHistoryMessagesPing">GetHistoryMessagesPing</h3>
+        <p>获取历史消息 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>peer</td>
+                  <td><a href="#Laana.LaanaPeer">LaanaPeer</a></td>
+                  <td></td>
+                  <td><p>消息来源 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastMsgSeq</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>最近一条消息的 msgSeq </p></td>
+                </tr>
+              
+                <tr>
+                  <td>count</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>获取的消息数量 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetHistoryMessagesPong">GetHistoryMessagesPong</h3>
+        <p>获取历史消息 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>messages</td>
+                  <td><a href="#Laana.LaanaMessage">LaanaMessage</a></td>
+                  <td>repeated</td>
+                  <td><p>获取的消息列表 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetMessagePing">GetMessagePing</h3>
+        <p>获取消息 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>msgSeq</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>消息的 msgSeq </p></td>
+                </tr>
+              
+                <tr>
+                  <td>peer</td>
+                  <td><a href="#Laana.LaanaPeer">LaanaPeer</a></td>
+                  <td></td>
+                  <td><p>消息来源 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetMessagePong">GetMessagePong</h3>
+        <p>获取消息 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#Laana.LaanaMessage">LaanaMessage</a></td>
+                  <td></td>
+                  <td><p>获取的消息 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetMessagesPing">GetMessagesPing</h3>
+        <p>批量获取消息 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>msgSeqs</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>消息的 msgSeq 列表 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>peer</td>
+                  <td><a href="#Laana.LaanaPeer">LaanaPeer</a></td>
+                  <td></td>
+                  <td><p>消息来源 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetMessagesPong">GetMessagesPong</h3>
+        <p>批量获取消息 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>messages</td>
+                  <td><a href="#Laana.LaanaMessage">LaanaMessage</a></td>
+                  <td>repeated</td>
+                  <td><p>获取的消息列表 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaOutgoingMessage">LaanaOutgoingMessage</h3>
+        <p>将要发送的消息，不包含 msgSeq 等元数据</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>bubble</td>
+                  <td><a href="#Laana.LaanaMessage.Bubble">LaanaMessage.Bubble</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>file</td>
+                  <td><a href="#Laana.LaanaMessage.NormalFile">LaanaMessage.NormalFile</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>singleImage</td>
+                  <td><a href="#Laana.LaanaMessage.SingleImage">LaanaMessage.SingleImage</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>marketFace</td>
+                  <td><a href="#Laana.LaanaMessage.MarketFace">LaanaMessage.MarketFace</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>video</td>
+                  <td><a href="#Laana.LaanaFile">LaanaFile</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>voice</td>
+                  <td><a href="#Laana.LaanaFile">LaanaFile</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>linkCard</td>
+                  <td><a href="#Laana.LaanaMessage.LinkCard">LaanaMessage.LinkCard</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>contactCard</td>
+                  <td><a href="#Laana.LaanaMessage.ContactCard">LaanaMessage.ContactCard</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>musicCard</td>
+                  <td><a href="#Laana.LaanaMessage.MusicCard">LaanaMessage.MusicCard</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>locationCard</td>
+                  <td><a href="#Laana.LaanaMessage.LocationCard">LaanaMessage.LocationCard</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>forwardedMessage</td>
+                  <td><a href="#Laana.LaanaOutgoingMessage.ConstructedForwardedMessage">LaanaOutgoingMessage.ConstructedForwardedMessage</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>xmlMessage</td>
+                  <td><a href="#Laana.LaanaMessage.XmlMessage">LaanaMessage.XmlMessage</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>arkMessage</td>
+                  <td><a href="#Laana.LaanaMessage.ArkMessage">LaanaMessage.ArkMessage</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaOutgoingMessage.ConstructedForwardedMessage">LaanaOutgoingMessage.ConstructedForwardedMessage</h3>
+        <p>构造（伪造）的转发消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>nodes</td>
+                  <td><a href="#Laana.LaanaOutgoingMessage.ConstructedForwardedMessage.Node">LaanaOutgoingMessage.ConstructedForwardedMessage.Node</a></td>
+                  <td>repeated</td>
+                  <td><p>转发的消息节点 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaOutgoingMessage.ConstructedForwardedMessage.Node">LaanaOutgoingMessage.ConstructedForwardedMessage.Node</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>senderUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>发送者 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>senderName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>显示的发送者名称 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#Laana.LaanaOutgoingMessage">LaanaOutgoingMessage</a></td>
+                  <td></td>
+                  <td><p>消息内容 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.MarkPeerMessageAsReadPing">MarkPeerMessageAsReadPing</h3>
+        <p>将消息标为已读 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>peer</td>
+                  <td><a href="#Laana.LaanaPeer">LaanaPeer</a></td>
+                  <td></td>
+                  <td><p>消息来源 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.SendMessagePing">SendMessagePing</h3>
+        <p>发送消息 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>targetPeer</td>
+                  <td><a href="#Laana.LaanaPeer">LaanaPeer</a></td>
+                  <td></td>
+                  <td><p>目标 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#Laana.LaanaOutgoingMessage">LaanaOutgoingMessage</a></td>
+                  <td></td>
+                  <td><p>消息 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.SendMessagePong">SendMessagePong</h3>
+        <p>发送消息 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>msgSeq</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>发送的消息对应的 msgSeq </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.WithdrawMessagePing">WithdrawMessagePing</h3>
+        <p>撤回消息 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>msgSeq</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>消息的 msgSeq </p></td>
+                </tr>
+              
+                <tr>
+                  <td>peer</td>
+                  <td><a href="#Laana.LaanaPeer">LaanaPeer</a></td>
+                  <td></td>
+                  <td><p>消息来源 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="entity/user.proto">entity/user.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.LaanaUserEntity">LaanaUserEntity</h3>
+        <p>Laana 用户</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>uin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>nick</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>昵称 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sex</td>
+                  <td><a href="#Laana.LaanaUserEntity.Sex">LaanaUserEntity.Sex</a></td>
+                  <td></td>
+                  <td><p>性别 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>age</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td>optional</td>
+                  <td><p>年龄 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>qid</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>QID，用于辨别用户的另一种方式 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>buddyRoleData</td>
+                  <td><a href="#Laana.LaanaUserEntity.BuddyRoleData">LaanaUserEntity.BuddyRoleData</a></td>
+                  <td></td>
+                  <td><p>如果是作为好友被查询，则返回此数据 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupRoleData</td>
+                  <td><a href="#Laana.LaanaUserEntity.GroupRoleData">LaanaUserEntity.GroupRoleData</a></td>
+                  <td></td>
+                  <td><p>如果是作为群成员被查询，则返回此数据 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaUserEntity.BuddyRoleData">LaanaUserEntity.BuddyRoleData</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>remark</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>好友备注 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaUserEntity.GroupRoleData">LaanaUserEntity.GroupRoleData</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>permissionLevel</td>
+                  <td><a href="#Laana.LaanaUserEntity.GroupRoleData.PermissionLevel">LaanaUserEntity.GroupRoleData.PermissionLevel</a></td>
+                  <td></td>
+                  <td><p>权限等级 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupNick</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>群昵称 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>joinTime</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td>optional</td>
+                  <td><p>加群时间 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastSpeakTime</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>最后发言时间 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>shutUpTime</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>禁言时间 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isRobot</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>是否为机器人 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="Laana.LaanaUserEntity.GroupRoleData.PermissionLevel">LaanaUserEntity.GroupRoleData.PermissionLevel</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>FALLBACK</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>NORMAL</td>
+                <td>2</td>
+                <td><p>普通成员</p></td>
+              </tr>
+            
+              <tr>
+                <td>ADMIN</td>
+                <td>3</td>
+                <td><p>管理员</p></td>
+              </tr>
+            
+              <tr>
+                <td>OWNER</td>
+                <td>4</td>
+                <td><p>群主</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="Laana.LaanaUserEntity.Sex">LaanaUserEntity.Sex</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>UNKNOWN</td>
+                <td>0</td>
+                <td><p>未知 / 其他</p></td>
+              </tr>
+            
+              <tr>
+                <td>MALE</td>
+                <td>1</td>
+                <td><p>男</p></td>
+              </tr>
+            
+              <tr>
+                <td>FEMALE</td>
+                <td>2</td>
+                <td><p>女</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="entity/group.proto">entity/group.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.LaanaGroup">LaanaGroup</h3>
+        <p>Laana 群</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群名称 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>memberCount</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>群人数 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>maxMemberCount</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>群容量 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupRemark</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>群备注，类似好友备注 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="action/contact_action.proto">action/contact_action.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.GetAllBuddiesPing">GetAllBuddiesPing</h3>
+        <p>获取所有好友 - 请求</p>
+
+        
+
+        
+      
+        <h3 id="Laana.GetAllBuddiesPong">GetAllBuddiesPong</h3>
+        <p>获取所有好友 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>buddyUins</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>好友 Uin 列表 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetAllGroupsPing">GetAllGroupsPing</h3>
+        <p>获取所有群组 - 请求</p>
+
+        
+
+        
+      
+        <h3 id="Laana.GetAllGroupsPong">GetAllGroupsPong</h3>
+        <p>获取所有群组 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCodes</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>群号列表 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetBuddyInfoPing">GetBuddyInfoPing</h3>
+        <p>获取好友信息 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>buddyUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>好友 Uin </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetBuddyInfoPong">GetBuddyInfoPong</h3>
+        <p>获取好友信息 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>buddy</td>
+                  <td><a href="#Laana.LaanaUserEntity">LaanaUserEntity</a></td>
+                  <td></td>
+                  <td><p>好友信息 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetGroupInfoPing">GetGroupInfoPing</h3>
+        <p>获取群组信息 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetGroupInfoPong">GetGroupInfoPong</h3>
+        <p>获取群组信息 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>group</td>
+                  <td><a href="#Laana.LaanaGroup">LaanaGroup</a></td>
+                  <td></td>
+                  <td><p>群组信息 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="action/group_action.proto">action/group_action.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.GetAllGroupMembersInfoPing">GetAllGroupMembersInfoPing</h3>
+        <p>获取所有群成员信息 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetAllGroupMembersInfoPong">GetAllGroupMembersInfoPong</h3>
+        <p>获取所有群成员信息 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>members</td>
+                  <td><a href="#Laana.LaanaUserEntity">LaanaUserEntity</a></td>
+                  <td>repeated</td>
+                  <td><p>群成员信息列表 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetGroupMemberInfoPing">GetGroupMemberInfoPing</h3>
+        <p>获取群成员信息 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>memberUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群成员 Uin </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetGroupMemberInfoPong">GetGroupMemberInfoPong</h3>
+        <p>获取群成员信息 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>member</td>
+                  <td><a href="#Laana.LaanaUserEntity">LaanaUserEntity</a></td>
+                  <td></td>
+                  <td><p>群成员信息 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetGroupMemberUinsPing">GetGroupMemberUinsPing</h3>
+        <p>获取所有群成员 Uin - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetGroupMemberUinsPong">GetGroupMemberUinsPong</h3>
+        <p>获取所有群成员 Uin - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>memberUins</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>群成员 Uin 列表 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.KickGroupMemberPing">KickGroupMemberPing</h3>
+        <p>踢出群成员 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>memberUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群成员 Uin </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.QuitGroupPing">QuitGroupPing</h3>
+        <p>退出群 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.SetGroupAdminPing">SetGroupAdminPing</h3>
+        <p>设置群管理员 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>memberUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群成员 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operation</td>
+                  <td><a href="#Laana.SetGroupAdminPing.Operation">SetGroupAdminPing.Operation</a></td>
+                  <td></td>
+                  <td><p>操作，设置或取消 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.SetGroupAvatarPing">SetGroupAvatarPing</h3>
+        <p>设置群头像 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>avatar</td>
+                  <td><a href="#Laana.LaanaFile">LaanaFile</a></td>
+                  <td></td>
+                  <td><p>群头像 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.SetGroupAvatarPong">SetGroupAvatarPong</h3>
+        <p>获取群成员信息 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>avatarCacheId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>头像的缓存 ID </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.SetGroupMemberCardPing">SetGroupMemberCardPing</h3>
+        <p>设置群成员名片 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>memberUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群成员 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>card</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>名片 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.SetGroupMemberShutUpPing">SetGroupMemberShutUpPing</h3>
+        <p>设置群成员禁言 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>memberUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群成员 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>表示禁言，duration 为禁言时长，单位为秒 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lift</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>表示解禁 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.SetGroupMemberSpecialTitlePing">SetGroupMemberSpecialTitlePing</h3>
+        <p>设置群成员专属头衔 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>memberUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群成员 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>title</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>专属头衔 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.SetGroupNamePing">SetGroupNamePing</h3>
+        <p>获取群成员信息 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群名称 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.SetGroupShutUpAllPing">SetGroupShutUpAllPing</h3>
+        <p>设置全员禁言 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operation</td>
+                  <td><a href="#Laana.SetGroupShutUpAllPing.Operation">SetGroupShutUpAllPing.Operation</a></td>
+                  <td></td>
+                  <td><p>操作，全员禁言或解除全员禁言 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="Laana.SetGroupAdminPing.Operation">SetGroupAdminPing.Operation</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>SET</td>
+                <td>0</td>
+                <td><p>设置</p></td>
+              </tr>
+            
+              <tr>
+                <td>UNSET</td>
+                <td>1</td>
+                <td><p>取消</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="Laana.SetGroupShutUpAllPing.Operation">SetGroupShutUpAllPing.Operation</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>SHUT_UP</td>
+                <td>0</td>
+                <td><p>全员禁言</p></td>
+              </tr>
+            
+              <tr>
+                <td>LIFT</td>
+                <td>1</td>
+                <td><p>解除全员禁言</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="event/request_event.proto">event/request_event.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.LaanaSelfInvitedToGroupEvent">LaanaSelfInvitedToGroupEvent</h3>
+        <p>有人邀请 Bot 加入群组事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>invitationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>请求 ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invitorUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>邀请者 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>words</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>邀请时的附言 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaSomeoneRequestToAddBuddyEvent">LaanaSomeoneRequestToAddBuddyEvent</h3>
+        <p>有人请求添加好友事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>buddyRequestId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>请求 ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>requesterUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>请求者 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>words</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>请求时的附言 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaSomeoneRequestToJoinGroupEvent">LaanaSomeoneRequestToJoinGroupEvent</h3>
+        <p>有人请求加入群组事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>joinRequestId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>请求 ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>requesterUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>请求者 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invitorUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>邀请者 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>words</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>请求时的附言 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="Laana.LaanaSelfInvitedToGroupEvent.State">LaanaSelfInvitedToGroupEvent.State</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>PENDING_AT_INVITEE</td>
+                <td>0</td>
+                <td><p>需要邀请者同意</p></td>
+              </tr>
+            
+              <tr>
+                <td>PENDING_AT_ADMIN</td>
+                <td>1</td>
+                <td><p>邀请者已同意，等待管理员审批</p></td>
+              </tr>
+            
+              <tr>
+                <td>SUCCEEDED</td>
+                <td>2</td>
+                <td><p>邀请成功</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="action/request_action.proto">action/request_action.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.HandleBuddyAddRequestPing">HandleBuddyAddRequestPing</h3>
+        <p>处理好友添加请求 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>buddyRequestId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>请求 ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operation</td>
+                  <td><a href="#Laana.HandleBuddyAddRequestPing.Operation">HandleBuddyAddRequestPing.Operation</a></td>
+                  <td></td>
+                  <td><p>操作 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rejectionWords</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>拒绝理由 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.HandleGroupInvitationPing">HandleGroupInvitationPing</h3>
+        <p>处理群组邀请 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>invitationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>邀请 ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operation</td>
+                  <td><a href="#Laana.HandleGroupInvitationPing.Operation">HandleGroupInvitationPing.Operation</a></td>
+                  <td></td>
+                  <td><p>操作 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.HandleGroupInvitationPong">HandleGroupInvitationPong</h3>
+        <p>处理群组邀请 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>nextState</td>
+                  <td><a href="#Laana.LaanaSelfInvitedToGroupEvent.State">LaanaSelfInvitedToGroupEvent.State</a></td>
+                  <td></td>
+                  <td><p>处理该邀请后，下一步的状态 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.HandleGroupJoinRequestPing">HandleGroupJoinRequestPing</h3>
+        <p>处理群组加入请求 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>joinRequestId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>请求 ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operation</td>
+                  <td><a href="#Laana.HandleGroupJoinRequestPing.Operation">HandleGroupJoinRequestPing.Operation</a></td>
+                  <td></td>
+                  <td><p>操作 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rejectionWords</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>拒绝理由 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="Laana.HandleBuddyAddRequestPing.Operation">HandleBuddyAddRequestPing.Operation</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ACCEPT</td>
+                <td>0</td>
+                <td><p>接受</p></td>
+              </tr>
+            
+              <tr>
+                <td>REJECT</td>
+                <td>1</td>
+                <td><p>拒绝</p></td>
+              </tr>
+            
+              <tr>
+                <td>IGNORE</td>
+                <td>2</td>
+                <td><p>忽略</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="Laana.HandleGroupInvitationPing.Operation">HandleGroupInvitationPing.Operation</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ACCEPT</td>
+                <td>0</td>
+                <td><p>接受</p></td>
+              </tr>
+            
+              <tr>
+                <td>REJECT</td>
+                <td>1</td>
+                <td><p>拒绝</p></td>
+              </tr>
+            
+              <tr>
+                <td>IGNORE</td>
+                <td>2</td>
+                <td><p>忽略</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="Laana.HandleGroupJoinRequestPing.Operation">HandleGroupJoinRequestPing.Operation</h3>
+        <p>操作</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ACCEPT</td>
+                <td>0</td>
+                <td><p>接受</p></td>
+              </tr>
+            
+              <tr>
+                <td>REJECT</td>
+                <td>1</td>
+                <td><p>拒绝</p></td>
+              </tr>
+            
+              <tr>
+                <td>IGNORE</td>
+                <td>2</td>
+                <td><p>忽略</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="action/file_action.proto">action/file_action.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.CreateGroupFolderPing">CreateGroupFolderPing</h3>
+        <p>创建群文件夹 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>文件夹名 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.CreateGroupFolderPong">CreateGroupFolderPong</h3>
+        <p>创建群文件夹 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>folderId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>文件夹 ID </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.DeleteGroupFilePing">DeleteGroupFilePing</h3>
+        <p>删除群文件 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cacheId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>缓存 ID </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.DeleteGroupFolderPing">DeleteGroupFolderPing</h3>
+        <p>删除群文件夹 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>folderId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>文件夹 ID </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.DestroyCachePing">DestroyCachePing</h3>
+        <p>销毁缓存 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>cacheId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>缓存 ID </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetFileDataPing">GetFileDataPing</h3>
+        <p>获取文件数据 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>cacheId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>缓存 ID </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetFileDataPong">GetFileDataPong</h3>
+        <p>获取文件数据 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>字节数据 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetGroupFileListPing">GetGroupFileListPing</h3>
+        <p>获取群文件列表 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>folderId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>文件夹 ID，默认为根目录 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GetGroupFileListPong">GetGroupFileListPong</h3>
+        <p>获取群文件列表 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>files</td>
+                  <td><a href="#Laana.GroupFile">GroupFile</a></td>
+                  <td>repeated</td>
+                  <td><p>文件列表 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>folders</td>
+                  <td><a href="#Laana.GroupFolder">GroupFolder</a></td>
+                  <td>repeated</td>
+                  <td><p>文件夹列表 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.PrepareCacheByUrlPing">PrepareCacheByUrlPing</h3>
+        <p>获取缓存 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>url</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>URL </p></td>
+                </tr>
+              
+                <tr>
+                  <td>method</td>
+                  <td><a href="#Laana.PrepareCacheByUrlPing.Method">PrepareCacheByUrlPing.Method</a></td>
+                  <td>optional</td>
+                  <td><p>请求的 Method，默认为 GET </p></td>
+                </tr>
+              
+                <tr>
+                  <td>headers</td>
+                  <td><a href="#Laana.PrepareCacheByUrlPing.HeadersEntry">PrepareCacheByUrlPing.HeadersEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>请求头 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.PrepareCacheByUrlPing.HeadersEntry">PrepareCacheByUrlPing.HeadersEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.PrepareCacheByUrlPong">PrepareCacheByUrlPong</h3>
+        <p>获取缓存 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>cacheId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>缓存 ID </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.UploadCachePing">UploadCachePing</h3>
+        <p>上传缓存 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>数据 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.UploadCachePong">UploadCachePong</h3>
+        <p>上传缓存 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>cacheId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>缓存 ID </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.UploadGroupFilePing">UploadGroupFilePing</h3>
+        <p>上传群文件 - 请求</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>file</td>
+                  <td><a href="#Laana.LaanaFile">LaanaFile</a></td>
+                  <td></td>
+                  <td><p>文件 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>folderId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>文件夹 ID，默认为根目录 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.UploadGroupFilePong">UploadGroupFilePong</h3>
+        <p>上传群文件 - 响应</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>cacheId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>缓存 ID </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="Laana.PrepareCacheByUrlPing.Method">PrepareCacheByUrlPing.Method</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>GET</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>POST</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>PUT</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DELETE</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="action/action_wrapper.proto">action/action_wrapper.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.ExtendedActionPing">ExtendedActionPing</h3>
+        <p>扩展动作的请求数据</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>actionName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>动作名称 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>actionData</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>动作数据 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.ExtendedActionPong">ExtendedActionPong</h3>
+        <p>扩展动作的响应数据</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>actionName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>动作名称 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pongData</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>动作数据 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.FailedPong">FailedPong</h3>
+        <p>如果请求失败，则返回此消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>reason</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.GeneralSuccessPong">GeneralSuccessPong</h3>
+        <p>如果请求成功，且 API 本身不需要返回数据，则返回此消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>success</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaActionPing">LaanaActionPing</h3>
+        <p>所有 API 请求的包装器</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>clientPingSeq</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>客户端请求的序列号，用于区分不同的请求 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sendMessage</td>
+                  <td><a href="#Laana.SendMessagePing">SendMessagePing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getMessage</td>
+                  <td><a href="#Laana.GetMessagePing">GetMessagePing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getMessages</td>
+                  <td><a href="#Laana.GetMessagesPing">GetMessagesPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getHistoryMessages</td>
+                  <td><a href="#Laana.GetHistoryMessagesPing">GetHistoryMessagesPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>withdrawMessage</td>
+                  <td><a href="#Laana.WithdrawMessagePing">WithdrawMessagePing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>markPeerMessageAsRead</td>
+                  <td><a href="#Laana.MarkPeerMessageAsReadPing">MarkPeerMessageAsReadPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getForwardedMessages</td>
+                  <td><a href="#Laana.GetForwardedMessagesPing">GetForwardedMessagesPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getAllBuddies</td>
+                  <td><a href="#Laana.GetAllBuddiesPing">GetAllBuddiesPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getAllGroups</td>
+                  <td><a href="#Laana.GetAllGroupsPing">GetAllGroupsPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getBuddyInfo</td>
+                  <td><a href="#Laana.GetBuddyInfoPing">GetBuddyInfoPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getGroupInfo</td>
+                  <td><a href="#Laana.GetGroupInfoPing">GetGroupInfoPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getGroupMemberUins</td>
+                  <td><a href="#Laana.GetGroupMemberUinsPing">GetGroupMemberUinsPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getGroupMemberInfo</td>
+                  <td><a href="#Laana.GetGroupMemberInfoPing">GetGroupMemberInfoPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getAllGroupMembersInfo</td>
+                  <td><a href="#Laana.GetAllGroupMembersInfoPing">GetAllGroupMembersInfoPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setGroupName</td>
+                  <td><a href="#Laana.SetGroupNamePing">SetGroupNamePing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setGroupAvatar</td>
+                  <td><a href="#Laana.SetGroupAvatarPing">SetGroupAvatarPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setGroupAdmin</td>
+                  <td><a href="#Laana.SetGroupAdminPing">SetGroupAdminPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setGroupMemberCard</td>
+                  <td><a href="#Laana.SetGroupMemberCardPing">SetGroupMemberCardPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setGroupMemberSpecialTitle</td>
+                  <td><a href="#Laana.SetGroupMemberSpecialTitlePing">SetGroupMemberSpecialTitlePing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setGroupMemberShutUp</td>
+                  <td><a href="#Laana.SetGroupMemberShutUpPing">SetGroupMemberShutUpPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setGroupShutUpAll</td>
+                  <td><a href="#Laana.SetGroupShutUpAllPing">SetGroupShutUpAllPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>kickGroupMember</td>
+                  <td><a href="#Laana.KickGroupMemberPing">KickGroupMemberPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>quitGroup</td>
+                  <td><a href="#Laana.QuitGroupPing">QuitGroupPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>handleBuddyAddRequest</td>
+                  <td><a href="#Laana.HandleBuddyAddRequestPing">HandleBuddyAddRequestPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>handleGroupJoinRequest</td>
+                  <td><a href="#Laana.HandleGroupJoinRequestPing">HandleGroupJoinRequestPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>handleGroupInvitation</td>
+                  <td><a href="#Laana.HandleGroupInvitationPing">HandleGroupInvitationPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>uploadCache</td>
+                  <td><a href="#Laana.UploadCachePing">UploadCachePing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prepareCacheByUrl</td>
+                  <td><a href="#Laana.PrepareCacheByUrlPing">PrepareCacheByUrlPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>destroyCache</td>
+                  <td><a href="#Laana.DestroyCachePing">DestroyCachePing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getFileData</td>
+                  <td><a href="#Laana.GetFileDataPing">GetFileDataPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getGroupFileList</td>
+                  <td><a href="#Laana.GetGroupFileListPing">GetGroupFileListPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>uploadGroupFile</td>
+                  <td><a href="#Laana.UploadGroupFilePing">UploadGroupFilePing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createGroupFolder</td>
+                  <td><a href="#Laana.CreateGroupFolderPing">CreateGroupFolderPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>deleteGroupFile</td>
+                  <td><a href="#Laana.DeleteGroupFilePing">DeleteGroupFilePing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>deleteGroupFolder</td>
+                  <td><a href="#Laana.DeleteGroupFolderPing">DeleteGroupFolderPing</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>extendedAction</td>
+                  <td><a href="#Laana.ExtendedActionPing">ExtendedActionPing</a></td>
+                  <td></td>
+                  <td><p>扩展动作 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaActionPong">LaanaActionPong</h3>
+        <p>所有 API 响应数据的包装器</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>clientPingSeq</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>对应请求的客户端请求序列号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>failed</td>
+                  <td><a href="#Laana.FailedPong">FailedPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sendMessage</td>
+                  <td><a href="#Laana.SendMessagePong">SendMessagePong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getMessage</td>
+                  <td><a href="#Laana.GetMessagePong">GetMessagePong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getMessages</td>
+                  <td><a href="#Laana.GetMessagesPong">GetMessagesPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getHistoryMessages</td>
+                  <td><a href="#Laana.GetHistoryMessagesPong">GetHistoryMessagesPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>withdrawMessage</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>markPeerMessageAsRead</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getForwardedMessages</td>
+                  <td><a href="#Laana.GetForwardedMessagesPong">GetForwardedMessagesPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getAllBuddies</td>
+                  <td><a href="#Laana.GetAllBuddiesPong">GetAllBuddiesPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getAllGroups</td>
+                  <td><a href="#Laana.GetAllGroupsPong">GetAllGroupsPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getBuddyInfo</td>
+                  <td><a href="#Laana.GetBuddyInfoPong">GetBuddyInfoPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getGroupInfo</td>
+                  <td><a href="#Laana.GetGroupInfoPong">GetGroupInfoPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getGroupMemberUins</td>
+                  <td><a href="#Laana.GetGroupMemberUinsPong">GetGroupMemberUinsPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getGroupMemberInfo</td>
+                  <td><a href="#Laana.GetGroupMemberInfoPong">GetGroupMemberInfoPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getAllGroupMembersInfo</td>
+                  <td><a href="#Laana.GetAllGroupMembersInfoPong">GetAllGroupMembersInfoPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setGroupName</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setGroupAvatar</td>
+                  <td><a href="#Laana.SetGroupAvatarPong">SetGroupAvatarPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setGroupAdmin</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setGroupMemberCard</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setGroupMemberSpecialTitle</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setGroupMemberShutUp</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setGroupShutUpAll</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>kickGroupMember</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>quitGroup</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>handleBuddyAddRequest</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>handleGroupJoinRequest</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>handleGroupInvitation</td>
+                  <td><a href="#Laana.HandleGroupInvitationPong">HandleGroupInvitationPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>uploadCache</td>
+                  <td><a href="#Laana.UploadCachePong">UploadCachePong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prepareCacheByUrl</td>
+                  <td><a href="#Laana.PrepareCacheByUrlPong">PrepareCacheByUrlPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>destroyCache</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getFileData</td>
+                  <td><a href="#Laana.GetFileDataPong">GetFileDataPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>getGroupFileList</td>
+                  <td><a href="#Laana.GetGroupFileListPong">GetGroupFileListPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>uploadGroupFile</td>
+                  <td><a href="#Laana.UploadGroupFilePong">UploadGroupFilePong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createGroupFolder</td>
+                  <td><a href="#Laana.CreateGroupFolderPong">CreateGroupFolderPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>deleteGroupFile</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>deleteGroupFolder</td>
+                  <td><a href="#Laana.GeneralSuccessPong">GeneralSuccessPong</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>extendedAction</td>
+                  <td><a href="#Laana.ExtendedActionPong">ExtendedActionPong</a></td>
+                  <td></td>
+                  <td><p>扩展动作 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="event/buddy_event.proto">event/buddy_event.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.LaanaBuddyAddedEvent">LaanaBuddyAddedEvent</h3>
+        <p>好友添加事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>buddyUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>好友 Uin </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaBuddyMessageWithdrawalEvent">LaanaBuddyMessageWithdrawalEvent</h3>
+        <p>好友撤回消息事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>buddyUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>好友 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>msgSeq</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>消息序列号 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="event/meta_event.proto">event/meta_event.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.LaanaBotOfflineEvent">LaanaBotOfflineEvent</h3>
+        <p>机器人下线事件</p>
+
+        
+
+        
+      
+        <h3 id="Laana.LaanaBotOnlineEvent">LaanaBotOnlineEvent</h3>
+        <p>机器人上线事件</p>
+
+        
+
+        
+      
+
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="event/group_event.proto">event/group_event.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.LaanaGroupAdminChangeEvent">LaanaGroupAdminChangeEvent</h3>
+        <p>群管理员变更事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>targetUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>变更的群成员 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operation</td>
+                  <td><a href="#Laana.LaanaGroupAdminChangeEvent.Operation">LaanaGroupAdminChangeEvent.Operation</a></td>
+                  <td></td>
+                  <td><p>操作 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaGroupEmojiLikeEvent">LaanaGroupEmojiLikeEvent</h3>
+        <p>群消息点赞事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>msgSeq</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>消息序列号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>emojiId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>表情 ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operation</td>
+                  <td><a href="#Laana.LaanaGroupEmojiLikeEvent.Operation">LaanaGroupEmojiLikeEvent.Operation</a></td>
+                  <td></td>
+                  <td><p>操作 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operatorUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>操作者 Uin </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaGroupEssenceMessageEvent">LaanaGroupEssenceMessageEvent</h3>
+        <p>设置群精华消息事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>msgSeq</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>消息序列号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operation</td>
+                  <td><a href="#Laana.LaanaGroupEssenceMessageEvent.Operation">LaanaGroupEssenceMessageEvent.Operation</a></td>
+                  <td></td>
+                  <td><p>操作 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operatorUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>操作者 Uin </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaGroupLiftShutUpAllEvent">LaanaGroupLiftShutUpAllEvent</h3>
+        <p>群全体禁言解除事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operatorUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>操作者 Uin </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaGroupLiftShutUpMemberEvent">LaanaGroupLiftShutUpMemberEvent</h3>
+        <p>群成员被解禁事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>targetUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>被解禁的群成员 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operatorUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>操作者 Uin </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaGroupMemberCardChangeEvent">LaanaGroupMemberCardChangeEvent</h3>
+        <p>群成员名片变更事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>targetUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>变更的群成员 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>newCard</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>新名片 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaGroupMemberDecreaseEvent">LaanaGroupMemberDecreaseEvent</h3>
+        <p>群成员减少事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>oldMemberUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>旧成员 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operatorUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>操作者 Uin（若有） </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaGroupMemberIncreaseEvent">LaanaGroupMemberIncreaseEvent</h3>
+        <p>群成员增加事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>newMemberUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>新成员 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operatorUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>操作者 Uin（若有） </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invitorUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>邀请者 Uin（若有） </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaGroupMemberTitleChangeEvent">LaanaGroupMemberTitleChangeEvent</h3>
+        <p>群成员专属头衔变更事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>targetUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>变更的群成员 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>newTitle</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>新专属头衔 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaGroupMessageWithdrawalEvent">LaanaGroupMessageWithdrawalEvent</h3>
+        <p>群消息撤回事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>msgSeq</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>撤回的消息序列号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operatorUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>操作者 Uin </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaGroupShutUpAllEvent">LaanaGroupShutUpAllEvent</h3>
+        <p>群被全员禁言事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operatorUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>操作者 Uin </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaGroupShutUpMemberEvent">LaanaGroupShutUpMemberEvent</h3>
+        <p>群成员被禁言事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>群号 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>targetUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>被禁言的群成员 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>禁言时长，单位为秒 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operatorUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>操作者 Uin </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="Laana.LaanaGroupAdminChangeEvent.Operation">LaanaGroupAdminChangeEvent.Operation</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>SET</td>
+                <td>0</td>
+                <td><p>设置</p></td>
+              </tr>
+            
+              <tr>
+                <td>UNSET</td>
+                <td>1</td>
+                <td><p>取消</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="Laana.LaanaGroupEmojiLikeEvent.Operation">LaanaGroupEmojiLikeEvent.Operation</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>LIKE</td>
+                <td>0</td>
+                <td><p>点赞</p></td>
+              </tr>
+            
+              <tr>
+                <td>DISLIKE</td>
+                <td>1</td>
+                <td><p>取消点赞</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="Laana.LaanaGroupEssenceMessageEvent.Operation">LaanaGroupEssenceMessageEvent.Operation</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>SET</td>
+                <td>0</td>
+                <td><p>设置</p></td>
+              </tr>
+            
+              <tr>
+                <td>UNSET</td>
+                <td>1</td>
+                <td><p>取消</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="event/event_wrapper.proto">event/event_wrapper.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.LaanaEventWrapper">LaanaEventWrapper</h3>
+        <p>所有事件的包装器</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>eventId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>事件 ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>time</td>
+                  <td><a href="#uint64">uint64</a></td>
+                  <td></td>
+                  <td><p>时间戳 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>botUin</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>接收事件的机器人 Uin </p></td>
+                </tr>
+              
+                <tr>
+                  <td>buddyAddedEvent</td>
+                  <td><a href="#Laana.LaanaBuddyAddedEvent">LaanaBuddyAddedEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>buddyMessageWithdrawEvent</td>
+                  <td><a href="#Laana.LaanaBuddyMessageWithdrawalEvent">LaanaBuddyMessageWithdrawalEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupAdminChangeEvent</td>
+                  <td><a href="#Laana.LaanaGroupAdminChangeEvent">LaanaGroupAdminChangeEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupEssenceMessageEvent</td>
+                  <td><a href="#Laana.LaanaGroupEssenceMessageEvent">LaanaGroupEssenceMessageEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupMemberCardChangeEvent</td>
+                  <td><a href="#Laana.LaanaGroupMemberCardChangeEvent">LaanaGroupMemberCardChangeEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupMemberIncreaseEvent</td>
+                  <td><a href="#Laana.LaanaGroupMemberIncreaseEvent">LaanaGroupMemberIncreaseEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupMemberDecreaseEvent</td>
+                  <td><a href="#Laana.LaanaGroupMemberDecreaseEvent">LaanaGroupMemberDecreaseEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupMemberTitleChangeEvent</td>
+                  <td><a href="#Laana.LaanaGroupMemberTitleChangeEvent">LaanaGroupMemberTitleChangeEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupMessageWithdrawEvent</td>
+                  <td><a href="#Laana.LaanaGroupMessageWithdrawalEvent">LaanaGroupMessageWithdrawalEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupMuteMemberEvent</td>
+                  <td><a href="#Laana.LaanaGroupShutUpMemberEvent">LaanaGroupShutUpMemberEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupMuteAllEvent</td>
+                  <td><a href="#Laana.LaanaGroupShutUpAllEvent">LaanaGroupShutUpAllEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupUnmuteMemberEvent</td>
+                  <td><a href="#Laana.LaanaGroupLiftShutUpMemberEvent">LaanaGroupLiftShutUpMemberEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupUnmuteAllEvent</td>
+                  <td><a href="#Laana.LaanaGroupLiftShutUpAllEvent">LaanaGroupLiftShutUpAllEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupEmojiLikeEvent</td>
+                  <td><a href="#Laana.LaanaGroupEmojiLikeEvent">LaanaGroupEmojiLikeEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>someoneRequestToAddBuddyEvent</td>
+                  <td><a href="#Laana.LaanaSomeoneRequestToAddBuddyEvent">LaanaSomeoneRequestToAddBuddyEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>someoneRequestToJoinGroupEvent</td>
+                  <td><a href="#Laana.LaanaSomeoneRequestToJoinGroupEvent">LaanaSomeoneRequestToJoinGroupEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>selfInvitedToGroupEvent</td>
+                  <td><a href="#Laana.LaanaSelfInvitedToGroupEvent">LaanaSelfInvitedToGroupEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>botOnlineEvent</td>
+                  <td><a href="#Laana.LaanaBotOnlineEvent">LaanaBotOnlineEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>botOfflineEvent</td>
+                  <td><a href="#Laana.LaanaBotOfflineEvent">LaanaBotOfflineEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>extendedEvent</td>
+                  <td><a href="#Laana.LaanaExtendedEvent">LaanaExtendedEvent</a></td>
+                  <td></td>
+                  <td><p>扩展事件 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaExtendedEvent">LaanaExtendedEvent</h3>
+        <p>扩展事件</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>eventName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>事件名称 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>eventData</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>事件数据 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="laana.proto">laana.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="Laana.LaanaClientSideHandshake">LaanaClientSideHandshake</h3>
+        <p>客户端的握手消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>clientVersion</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>客户端的 Laana 协议版本 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>clientName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>客户端的名称，例如 NoneBot2，用于区分不同的实现 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>token</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>客户端的 token，用于验证客户端的身份 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>extendedHandshakeData</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td>optional</td>
+                  <td><p>握手时的附加数据 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaDataWrapper">LaanaDataWrapper</h3>
+        <p>所有类型消息的包装器</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>actionPing</td>
+                  <td><a href="#Laana.LaanaActionPing">LaanaActionPing</a></td>
+                  <td></td>
+                  <td><p>调用 API 的请求 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>actionPong</td>
+                  <td><a href="#Laana.LaanaActionPong">LaanaActionPong</a></td>
+                  <td></td>
+                  <td><p>API 的响应 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>event</td>
+                  <td><a href="#Laana.LaanaEventWrapper">LaanaEventWrapper</a></td>
+                  <td></td>
+                  <td><p>事件 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#Laana.LaanaMessage">LaanaMessage</a></td>
+                  <td></td>
+                  <td><p>消息 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>clientSideHandshake</td>
+                  <td><a href="#Laana.LaanaClientSideHandshake">LaanaClientSideHandshake</a></td>
+                  <td></td>
+                  <td><p>客户端的握手请求 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>serverSideHandshake</td>
+                  <td><a href="#Laana.LaanaServerSideHandshake">LaanaServerSideHandshake</a></td>
+                  <td></td>
+                  <td><p>服务端的握手响应 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>extendedData</td>
+                  <td><a href="#Laana.LaanaExtendedData">LaanaExtendedData</a></td>
+                  <td></td>
+                  <td><p>未声明的扩展数据 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaExtendedData">LaanaExtendedData</h3>
+        <p>扩展数据的包装器</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>用于区分扩展数据类型 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>扩展数据 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="Laana.LaanaServerSideHandshake">LaanaServerSideHandshake</h3>
+        <p>客户端和服务端的握手消息</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>serverVersion</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>服务端的 Laana 协议版本 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>result</td>
+                  <td><a href="#Laana.LaanaServerSideHandshake.Result">LaanaServerSideHandshake.Result</a></td>
+                  <td></td>
+                  <td><p>握手结果 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>serverName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>服务端的名称，例如 Lagrange.Core，用于区分不同的实现 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>extendedHandshakeData</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td>optional</td>
+                  <td><p>握手时的附加数据 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="Laana.LaanaServerSideHandshake.Result">LaanaServerSideHandshake.Result</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>SUCCESS</td>
+                <td>0</td>
+                <td><p>握手成功</p></td>
+              </tr>
+            
+              <tr>
+                <td>FAILURE_WRONG_TOKEN</td>
+                <td>1</td>
+                <td><p>握手失败，原因：错误的 token</p></td>
+              </tr>
+            
+              <tr>
+                <td>FAILURE_LAANA_VERSION_MISMATCH</td>
+                <td>2</td>
+                <td><p>握手失败，原因：版本不匹配</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+    
+
+    <h2 id="scalar-value-types">Scalar Value Types</h2>
+    <table class="scalar-value-types-table">
+      <thead>
+        <tr><td>.proto Type</td><td>Notes</td><td>C++</td><td>Java</td><td>Python</td><td>Go</td><td>C#</td><td>PHP</td><td>Ruby</td></tr>
+      </thead>
+      <tbody>
+        
+          <tr id="double">
+            <td>double</td>
+            <td></td>
+            <td>double</td>
+            <td>double</td>
+            <td>float</td>
+            <td>float64</td>
+            <td>double</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="float">
+            <td>float</td>
+            <td></td>
+            <td>float</td>
+            <td>float</td>
+            <td>float</td>
+            <td>float32</td>
+            <td>float</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="int32">
+            <td>int32</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="int64">
+            <td>int64</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="uint32">
+            <td>uint32</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int/long</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="uint64">
+            <td>uint64</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint32">
+            <td>sint32</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint64">
+            <td>sint64</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="fixed32">
+            <td>fixed32</td>
+            <td>Always four bytes. More efficient than uint32 if values are often greater than 2^28.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="fixed64">
+            <td>fixed64</td>
+            <td>Always eight bytes. More efficient than uint64 if values are often greater than 2^56.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="sfixed32">
+            <td>sfixed32</td>
+            <td>Always four bytes.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sfixed64">
+            <td>sfixed64</td>
+            <td>Always eight bytes.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="bool">
+            <td>bool</td>
+            <td></td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>boolean</td>
+            <td>bool</td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>TrueClass/FalseClass</td>
+          </tr>
+        
+          <tr id="string">
+            <td>string</td>
+            <td>A string must always contain UTF-8 encoded or 7-bit ASCII text.</td>
+            <td>string</td>
+            <td>String</td>
+            <td>str/unicode</td>
+            <td>string</td>
+            <td>string</td>
+            <td>string</td>
+            <td>String (UTF-8)</td>
+          </tr>
+        
+          <tr id="bytes">
+            <td>bytes</td>
+            <td>May contain any arbitrary sequence of bytes.</td>
+            <td>string</td>
+            <td>ByteString</td>
+            <td>str</td>
+            <td>[]byte</td>
+            <td>ByteString</td>
+            <td>string</td>
+            <td>String (ASCII-8BIT)</td>
+          </tr>
+        
+      </tbody>
+    </table>
+  </body>
+</html>
+
